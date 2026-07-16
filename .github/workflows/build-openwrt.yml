@@ -1,4 +1,3 @@
-#
 # https://github.com/P3TERX/Actions-OpenWrt
 #
 # File: .github/workflows/openwrt-bulder.yml
@@ -31,6 +30,9 @@ env:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    # ---------- 添加下面这一行，授予写入权限 ----------
+    permissions:
+      contents: write   # 允许创建 Release 和删除旧 Release
 
     steps:
     - name: 释放磁盘空间
