@@ -22,9 +22,10 @@ sed -i 's/LEDE/OneCloud/g' package/base-files/files/bin/config_generate
 # 替换终端为bash
 sed -i 's/\/bin\/ash/\/bin\/bash/' package/base-files/files/etc/passwd
 
-# 修改默认用户名
-echo 'CONFIG_TARGET_ROOTFS_PASSWD_REPLACE=y' >> .config
-echo 'CONFIG_TARGET_ROOTFS_PASSWD_USERNAME="lis"' >> .config
-
-# 修改默认密码为liqwerty
-echo 'CONFIG_TARGET_ROOTFS_PASSWD_HASH="$(openssl passwd -6 -salt "onecloud" "liqwerty")"' >> .config
+# 修改默认用户名和密码
+PASSWD_HASH=$(openssl passwd -6 -salt "onecloud" "liqwerty")
+cat >> .config <<EOF
+CONFIG_TARGET_ROOTFS_PASSWD_REPLACE=y
+CONFIG_TARGET_ROOTFS_PASSWD_USERNAME="lis"
+CONFIG_TARGET_ROOTFS_PASSWD_HASH="$PASSWD_HASH"
+EOF
