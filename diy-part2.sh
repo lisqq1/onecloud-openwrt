@@ -29,3 +29,7 @@ CONFIG_TARGET_ROOTFS_PASSWD_REPLACE=y
 CONFIG_TARGET_ROOTFS_PASSWD_USERNAME="lis"
 CONFIG_TARGET_ROOTFS_PASSWD_HASH="$PASSWD_HASH"
 EOF
+
+# 删除不兼容的S905D补丁 - 修复编译失败问题
+[ -f target/linux/amlogic/patches-6.6/001-dts-s905d-fix-high-load.patch ] && \
+rm -f target/linux/amlogic/patches-6.6/001-dts-s905d-fix-high-load.patch
